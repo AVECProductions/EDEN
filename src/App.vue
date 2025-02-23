@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-wrapper">
     <!-- Navigation -->
     <nav class="nav-container">
       <div class="logo-container">
@@ -40,26 +40,6 @@
     <main class="main-content">
       <router-view></router-view>
     </main>
-
-    <!-- Example of embedded YouTube video section -->
-    <div class="video-section">
-      <h2>NICE, a fest 2024 Recap</h2>
-      <div class="video-container">
-        <iframe 
-          width="560" 
-          height="315" 
-          src="https://www.youtube.com/embed/your-video-id"
-          title="YouTube video player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-      </div>
-      <div class="thank-you-text">
-        <h1>THANK YOU FOR BEING NICE</h1>
-        <h2>SEE YOU IN 2025!</h2>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -81,6 +61,11 @@ export default {
 </script>
 
 <style>
+html, body {
+  height: 100%;
+  overflow-y: auto;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -92,13 +77,11 @@ body {
   width: 100%;
 }
 
-.app-container {
+.app-wrapper {
   min-height: 100vh;
-  width: 100vw;
-  background: #000;
-  color: white;
+  width: 100%;
   position: relative;
-  overflow-x: hidden;
+  background: radial-gradient(ellipse at bottom, #1a0933 0%, #090A0F 100%);
 }
 
 .nav-container {
@@ -154,7 +137,7 @@ body {
   transition: transform 0.3s ease;
   z-index: 999;
   display: flex;
-  padding: 2rem;
+  padding: 0;
 }
 
 .mobile-menu.show {
@@ -166,40 +149,64 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 4rem 0;
+  justify-content: center;
+  padding: 0;
+  position: relative;
 }
 
 .menu-items {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding-left: 1rem;
 }
 
 .menu-item {
   color: white;
   text-decoration: none;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+}
+
+.menu-item:hover {
+  color: #FFD700;
 }
 
 .social-links {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .social-icon {
   color: white;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   text-decoration: none;
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: white;
+  color: black;
 }
 
 .main-content {
-  padding-top: 60px;
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 /* Make sure router-view content is visible */
@@ -207,51 +214,6 @@ body {
   min-height: 100%;
 }
 
-.video-section {
-  padding: 2rem;
-  text-align: center;
-  color: white;
-}
-
-.video-container {
-  margin: 2rem auto;
-  max-width: 800px;
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.thank-you-text {
-  margin-top: 2rem;
-}
-
-.thank-you-text h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.thank-you-text h2 {
-  font-size: 2rem;
-  color: #b3e1ff;
-}
-
-@media (max-width: 768px) {
-  .thank-you-text h1 {
-    font-size: 1.8rem;
-  }
-
-  .thank-you-text h2 {
-    font-size: 1.5rem;
-  }
-}
+/* Keep existing styles for navigation and content */
 </style>
 
