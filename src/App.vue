@@ -28,8 +28,8 @@
         <div class="menu-items">
           <router-link to="/" class="menu-item" @click="toggleMenu">HOME</router-link>
           <router-link to="/about" class="menu-item" @click="toggleMenu">ABOUT</router-link>
+          <router-link to="/lineup" class="menu-item" @click="toggleMenu">LINEUP (COMING SOON)</router-link>
           <router-link to="/contact" class="menu-item" @click="toggleMenu">CONTACT</router-link>
-          <router-link to="/merch" class="menu-item" @click="toggleMenu">MERCH</router-link>
         </div>
         
         <div class="social-links">
