@@ -87,7 +87,7 @@ body {
 }
 
 .nav-container {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -143,12 +143,12 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background: #000;
   transform: translateX(100%);
   transition: transform 0.3s ease;
   z-index: 999;
   display: flex;
-  padding: 0;
 }
 
 .mobile-menu.show {
@@ -160,9 +160,8 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0;
-  position: relative;
+  justify-content: space-between;
+  padding: 4rem 0 2rem 0;
 }
 
 .menu-items {
@@ -171,12 +170,14 @@ body {
   gap: 0.8rem;
   align-items: flex-start;
   padding-left: 1rem;
+  flex: 1;
+  justify-content: center;
 }
 
 .menu-item {
   color: white;
   text-decoration: none;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 1px;
@@ -187,11 +188,11 @@ body {
 }
 
 .social-links {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
+  position: static;
+  padding-left: 1rem;
   display: flex;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 .social-icon {
@@ -223,6 +224,31 @@ body {
 /* Make sure router-view content is visible */
 .router-view {
   min-height: 100%;
+}
+
+/* Adjust for smaller screens */
+@media (max-height: 600px) {
+  .menu-content {
+    padding: 2rem 0 1rem 0;
+  }
+
+  .menu-items {
+    gap: 0.5rem;
+  }
+
+  .social-links {
+    margin-top: 1rem;
+  }
+
+  .menu-item {
+    font-size: 1.2rem;
+  }
+
+  .social-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
 }
 
 /* Keep existing styles for navigation and content */

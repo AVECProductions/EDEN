@@ -1,5 +1,5 @@
 <template>
-  <div class="landing-container">
+  <div class="landing-container" :class="{ 'text-shown': showText }">
     <div class="stars"></div>
     <div class="stars2"></div>
     <div class="stars3"></div>
@@ -59,12 +59,14 @@ export default {
     handleSpin() {
       if (!this.isSpinning) {
         this.isSpinning = true;
-        // Clear the timer if user clicks before auto-trigger
         if (this.autoTriggerTimer) {
           clearTimeout(this.autoTriggerTimer);
         }
         setTimeout(() => {
           this.showText = true;
+          setTimeout(() => {
+            document.querySelector('.landing-container').scrollTop = 0;
+          }, 100);
         }, 1500);
       }
     },
@@ -80,7 +82,6 @@ export default {
     this.setupAutoTrigger();
   },
   beforeUnmount() {
-    // Clean up timer if component is unmounted
     if (this.autoTriggerTimer) {
       clearTimeout(this.autoTriggerTimer);
     }
@@ -92,12 +93,24 @@ export default {
 .landing-container {
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(ellipse at bottom, #1a0933 0%, #090A0F 100%);
+  transition: overflow 0.3s ease;
+}
+
+.landing-container.text-shown {
+  overflow-y: auto;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  align-items: flex-start;
 }
 
 .content {
@@ -106,11 +119,15 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 1rem;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
 }
 
 .logo {
-  width: 25rem;
-  height: 25rem;
+  width: 20rem;
+  height: 20rem;
   object-fit: contain;
   animation: float 6s ease-in-out infinite;
   filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
@@ -123,10 +140,13 @@ export default {
 }
 
 .stars, .stars2, .stars3 {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: none;
   z-index: 0;
   animation: animStar 50s linear infinite;
 }
@@ -195,6 +215,7 @@ export default {
   opacity: 0;
   transform: translateY(50px);
   margin: 0 2rem;
+  padding-top: 2rem;
 }
 
 .columns {
@@ -248,6 +269,11 @@ export default {
 
 .spin-out {
   animation: spinOut 1.5s ease-in forwards !important;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 .fade-in {
@@ -268,11 +294,15 @@ export default {
 
 @keyframes spinOut {
   0% {
-    transform: rotateY(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
     opacity: 1;
   }
+  50% {
+    transform: rotate(720deg) scale(4);
+    opacity: 0.5;
+  }
   100% {
-    transform: rotateY(1800deg) scale(8);
+    transform: rotate(1440deg) scale(8);
     opacity: 0;
   }
 }
@@ -293,78 +323,26 @@ export default {
     transform: translateY(0);
   }
   to {
-    transform: translateY(-2000px);
+    transform: translateY(-50%);
   }
 }
 
 .stars:after, .stars2:after, .stars3:after {
-  content: " ";
-  position: absolute;
-  top: 2000px;
-  width: 2px;
-  height: 2px;
-  background: transparent;
-}
-
-.stars:after {
-  box-shadow: 
-    1744px 122px #FFF,
-    134px 1321px #FFF,
-    1934px 1273px #FFF,
-    1723px 1721px #FFF,
-    721px 1663px #FFF,
-    1833px 371px #FFF,
-    1342px 1623px #FFF,
-    1517px 1984px #FFF,
-    1236px 1273px #FFF,
-    154px 1555px #FFF,
-    1575px 1644px #FFF,
-    1630px 1320px #FFF,
-    1324px 1834px #FFF,
-    1431px 1515px #FFF,
-    521px 1778px #FFF,
-    1807px 1742px #FFF,
-    1857px 1332px #FFF,
-    1951px 1909px #FFF,
-    1484px 1679px #FFF,
-    1956px 1815px #FFF;
-}
-
-.stars2:after {
-  box-shadow: 
-    1448px 1021px #FFF,
-    1265px 571px #FFF,
-    1855px 1428px #FFF,
-    1520px 1620px #FFF,
-    1745px 1331px #FFF,
-    1699px 1456px #FFF,
-    1675px 1557px #FFF,
-    952px 1134px #FFF,
-    1272px 1627px #FFF,
-    1882px 1915px #FFF,
-    1241px 1624px #FFF,
-    1617px 1880px #FFF,
-    1046px 1887px #FFF;
-}
-
-.stars3:after {
-  box-shadow: 
-    1557px 1165px #FFF,
-    1965px 1153px #FFF,
-    1323px 1641px #FFF,
-    1307px 1768px #FFF,
-    1438px 1410px #FFF,
-    1574px 1403px #FFF,
-    1107px 1491px #FFF,
-    1708px 1703px #FFF,
-    1516px 1121px #FFF,
-    1133px 1333px #FFF;
+  display: none;
 }
 
 @media (max-width: 768px) {
+  .landing-container {
+    padding-top: 0;
+  }
+
   .logo {
-    width: 15rem;
-    height: 15rem;
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .content {
+    padding-top: 4rem;
   }
 
   .columns {
@@ -373,24 +351,37 @@ export default {
   }
 
   .festival-info {
-    margin: 0 1.5rem;
+    margin: 1rem 1.5rem 2rem 1.5rem;
     max-width: 100%;
+    padding-top: 1rem;
   }
 
   .festival-info h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
   }
 
   .info-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .info-section h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .info-section p {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+
+  @keyframes spinOut {
+    0% {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(720deg) scale(6);
+      opacity: 0;
+    }
   }
 }
 </style> 
