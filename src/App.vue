@@ -3,7 +3,9 @@
     <!-- Navigation -->
     <nav class="nav-container">
       <div class="logo-container">
-        <img src="./assets/EDEN.png" alt="Logo" class="nav-logo">
+        <router-link to="/">
+          <img src="./assets/EDEN.png" alt="Logo" class="nav-logo">
+        </router-link>
       </div>
       
       <button class="hamburger" @click="toggleMenu" aria-label="Menu">
@@ -98,10 +100,19 @@ body {
   max-width: 100vw;
 }
 
+.logo-container {
+  cursor: pointer;
+}
+
 .nav-logo {
   width: 40px;
   height: 40px;
   object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.1);
 }
 
 .hamburger {

@@ -51,17 +51,38 @@ export default {
   data() {
     return {
       isSpinning: false,
-      showText: false
+      showText: false,
+      autoTriggerTimer: null
     }
   },
   methods: {
     handleSpin() {
       if (!this.isSpinning) {
         this.isSpinning = true;
+        // Clear the timer if user clicks before auto-trigger
+        if (this.autoTriggerTimer) {
+          clearTimeout(this.autoTriggerTimer);
+        }
         setTimeout(() => {
           this.showText = true;
         }, 1500);
       }
+    },
+    setupAutoTrigger() {
+      this.autoTriggerTimer = setTimeout(() => {
+        if (!this.isSpinning) {
+          this.handleSpin();
+        }
+      }, 3000);
+    }
+  },
+  mounted() {
+    this.setupAutoTrigger();
+  },
+  beforeUnmount() {
+    // Clean up timer if component is unmounted
+    if (this.autoTriggerTimer) {
+      clearTimeout(this.autoTriggerTimer);
     }
   }
 }
