@@ -66,14 +66,14 @@ export default {
 
 h2 {
   font-size: 2.2rem;
-  color: #b3e1ff;
+  color: #2E7D32;
   margin-bottom: 1.5rem;
   font-family: 'Montserrat', sans-serif;
 }
 
 h3 {
   font-size: 1.6rem;
-  color: #b3e1ff;
+  color: #1B5E20;
   margin: 2rem 0 1rem;
   font-family: 'Montserrat', sans-serif;
 }

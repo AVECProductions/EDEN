@@ -1,5 +1,10 @@
 <template>
   <div class="app-wrapper">
+    <!-- Add clouds here -->
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+
     <!-- Navigation -->
     <nav class="nav-container">
       <div class="logo-container">
@@ -83,7 +88,8 @@ body {
   min-height: 100vh;
   width: 100%;
   position: relative;
-  background: radial-gradient(ellipse at bottom, #1a0933 0%, #090A0F 100%);
+  background: radial-gradient(ellipse at top, #89CFF0 0%, #40A2D8 100%);
+  overflow-x: hidden;
 }
 
 .nav-container {
@@ -251,6 +257,47 @@ body {
   }
 }
 
-/* Keep existing styles for navigation and content */
+/* Move cloud styles to global */
+.cloud {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cloud-1 {
+  width: 100px;
+  height: 40px;
+  top: 20%;
+  left: 20%;
+  animation: floatCloud 20s infinite linear;
+}
+
+.cloud-2 {
+  width: 150px;
+  height: 50px;
+  top: 40%;
+  right: 15%;
+  animation: floatCloud 25s infinite linear reverse;
+}
+
+.cloud-3 {
+  width: 120px;
+  height: 45px;
+  top: 60%;
+  left: 30%;
+  animation: floatCloud 22s infinite linear;
+}
+
+@keyframes floatCloud {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
 </style>
 

@@ -1,8 +1,11 @@
 <template>
-  <div class="landing-container" :class="{ 'text-shown': showText }">
-    <div class="stars"></div>
-    <div class="stars2"></div>
-    <div class="stars3"></div>
+  <div class="landing-container" :class="{ 'text-shown': showText, 'day-mode': showText }">
+    <div v-if="!showText" class="stars"></div>
+    <div v-if="!showText" class="stars2"></div>
+    <div v-if="!showText" class="stars3"></div>
+    <div v-if="showText" class="cloud cloud-1"></div>
+    <div v-if="showText" class="cloud cloud-2"></div>
+    <div v-if="showText" class="cloud cloud-3"></div>
     <div class="content">
       <img 
         v-if="!showText"
@@ -23,6 +26,7 @@
           <h2>A Festival for Our Planet</h2>
           <p>Join us at the Great American Beer Hall in Medford, MA on April 26, 2025, for a celebration of community, creation, and art - all while supporting the Clean Water Fund.</p>
         </div>
+      
 
         <div class="info-section columns">
           <div class="column">
@@ -99,8 +103,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at bottom, #1a0933 0%, #090A0F 100%);
-  transition: overflow 0.3s ease;
+  background: radial-gradient(ellipse at bottom, #1a0933 0%, #090A0F 100%) !important;
+  transition: all 1.5s ease-in-out;
+}
+
+.landing-container.day-mode {
+  background: radial-gradient(ellipse at top, #89CFF0 0%, #40A2D8 100%) !important;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .landing-container.text-shown {
@@ -111,6 +121,7 @@ export default {
   max-height: 100vh;
   max-height: 100dvh;
   align-items: flex-start;
+  padding-bottom: 0;
 }
 
 .content {
@@ -120,9 +131,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 1rem;
-  padding-top: 5rem;
-  padding-bottom: 2rem;
+  padding: 5rem 0 0 0;
 }
 
 .logo {
@@ -216,6 +225,20 @@ export default {
   transform: translateY(50px);
   margin: 0 2rem;
   padding-top: 2rem;
+  margin-bottom: 0;
+}
+
+.festival-info h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #40A2D8;
+  background: white;
+  padding: 1rem 2rem;
+  margin: 0 3% 2rem 3%;
+  width: 94%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .columns {
@@ -226,13 +249,6 @@ export default {
 
 .column {
   flex: 1;
-}
-
-.info-section h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  letter-spacing: 2px;
 }
 
 .info-section h2 {
@@ -257,13 +273,59 @@ export default {
 .purpose {
   text-align: center;
   font-style: italic;
-  color: #b3e1ff;
-  margin-top: 2rem;
+  color: #1a0933;
+  margin: 2rem 0 0 0;
+  background: linear-gradient(
+    to bottom,
+    #FFEB3B 0%,
+    #FFD700 20%,
+    #FFC107 50%,
+    #FF9800 80%,
+    #FF8C00 100%
+  );
+  padding: 3rem 2rem 2rem 2rem;
+  width: 100%;
+  position: relative;
+  border-radius: 50% 50% 0 0;
+  box-shadow: 
+    0 -10px 30px rgba(255, 215, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Add the rays effect */
+.purpose::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 20deg,
+    rgba(255, 235, 59, 0.2) 21deg,
+    transparent 22deg
+  );
+  opacity: 0.7;
+  pointer-events: none;
+  animation: shiningRays 60s linear infinite;
+}
+
+/* Add animation for the rays */
+@keyframes shiningRays {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .contact {
   font-size: 0.9rem;
   margin-top: 1rem;
+  margin-bottom: 0;
   font-style: normal;
 }
 
@@ -331,6 +393,94 @@ export default {
   display: none;
 }
 
+.day-mode .festival-info {
+  color: white;
+  text-shadow: none;
+  position: relative;
+  z-index: 2;
+}
+
+.day-mode .festival-info h1 {
+  color: #40A2D8;
+  font-weight: bold;
+  text-shadow: none;
+  background: white;
+  padding: 1rem 2rem;
+  margin: 0 3% 2rem 3%;
+  width: 94%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.day-mode .info-section h2 {
+  color: #2E7D32;
+}
+
+.day-mode .info-section h3 {
+  color: #1B5E20;
+}
+
+.day-mode .info-section p {
+  color: white;
+}
+
+.day-mode .purpose {
+  color: #1a0933;
+  background: linear-gradient(
+    to bottom,
+    #FFEB3B 0%,
+    #FFD700 20%,
+    #FFC107 50%,
+    #FF9800 80%,
+    #FF8C00 100%
+  );
+}
+
+.day-mode .contact {
+  color: #1a0933;
+}
+
+.day-mode .cloud {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.day-mode .cloud-1 {
+  width: 100px;
+  height: 40px;
+  top: 20%;
+  left: 20%;
+  animation: floatCloud 20s infinite linear;
+}
+
+.day-mode .cloud-2 {
+  width: 150px;
+  height: 50px;
+  top: 40%;
+  right: 15%;
+  animation: floatCloud 25s infinite linear reverse;
+}
+
+.day-mode .cloud-3 {
+  width: 120px;
+  height: 45px;
+  top: 60%;
+  left: 30%;
+  animation: floatCloud 22s infinite linear;
+}
+
+@keyframes floatCloud {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
 @media (max-width: 768px) {
   .landing-container {
     padding-top: 0;
@@ -342,7 +492,7 @@ export default {
   }
 
   .content {
-    padding-top: 4rem;
+    padding: 4rem 0 0 0;
   }
 
   .columns {
@@ -351,14 +501,16 @@ export default {
   }
 
   .festival-info {
-    margin: 1rem 1.5rem 2rem 1.5rem;
+    margin: 1rem 1.5rem 0 1.5rem;
     max-width: 100%;
     padding-top: 1rem;
   }
 
   .festival-info h1 {
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    margin: 0 3% 1.5rem 3%;
+    width: 94%;
   }
 
   .info-section h2 {
@@ -382,6 +534,16 @@ export default {
       transform: rotate(720deg) scale(6);
       opacity: 0;
     }
+  }
+
+  .purpose {
+    margin: 2rem 0 0 0;
+    width: 100%;
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .purpose::before {
+    height: 100px;  /* Smaller rays for mobile */
   }
 }
 </style> 

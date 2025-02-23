@@ -51,7 +51,7 @@ export default {
 }
 
 .title {
-  color: white;
+  color: #2E7D32;
   font-size: 3rem;
   margin-bottom: 3rem;
   font-family: 'Montserrat', sans-serif;
@@ -62,7 +62,7 @@ export default {
 }
 
 .contact-info h2 {
-  color: white;
+  color: #1B5E20;
   font-size: 1.5rem;
   margin-bottom: 0.25rem;
   font-family: 'Montserrat', sans-serif;
@@ -98,8 +98,8 @@ export default {
 }
 
 label {
-  display: block;
   color: white;
+  display: block;
   margin-bottom: 0.75rem;
   font-family: 'Montserrat', sans-serif;
 }
@@ -153,5 +153,19 @@ textarea {
   .half {
     width: 100%;
   }
+}
+
+h1, h2 {
+  color: #2E7D32;  /* Match the green from About page */
+  margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
 }
 </style> 
